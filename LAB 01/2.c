@@ -4,33 +4,28 @@ arr[0] + arr[1] + arr[2] . . . arr[i].*/
 
 #include<stdio.h>
 #include<stdlib.h>
-#include<limits.h>
 
 int main()
 {
-    int n, i, j, temp;
+    int n, i, j, temp, count=0, max=0, max_element;
     printf("Enter the size of the array: ");
     scanf("%d", &n);
-    int arr[n];
+    int arr[n], prefixSum[n];
     printf("Enter the elements of the array: ");
     for(i=0; i<n; i++)
     {
         scanf("%d", &arr[i]);
     }
+    prefixSum[0]=arr[0];
+    for(i=1; i<n; i++)
+    {
+        prefixSum[i]=prefixSum[i-1]+arr[i];
+    }
+    printf("The prefix sum array is: ");
     for(i=0; i<n; i++)
     {
-        for(j=i+1; j<n; j++)
-        {
-            if(arr[j]<arr[i])
-            {
-                temp=arr[i];
-                arr[i]=arr[j];
-                arr[j]=temp;
-            }
-        }
+        printf("%d ", prefixSum[i]);
     }
-    printf("The second smallest element is: %d\n", arr[1]);
-    printf("The second largest element is: %d\n", arr[n-2]);
+    printf("\n");
     return 0;
 }
-
